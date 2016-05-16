@@ -150,7 +150,6 @@
         health_check:
           ping_protocol: tcp # options are http, https, ssl, tcp
           ping_port: 80
-          #ping_path: "/index.html" # not required for tcp or ssl
           response_timeout: 5 # seconds
           interval: 30 # seconds
           unhealthy_threshold: 2
@@ -162,68 +161,10 @@
 
     - debug: msg="cluster_elb dns {{ cluster_elb.elb.dns_name }}"
 
-    - name: Provision m3.large instances
-      ec2:
-        aws_access_key: "{{ aws_access_key_id }}"
-        aws_secret_key: "{{ aws_secret_access_key }}"
-        region: "{{region}}"
-        group: "coreos-up-{{clusterid}}"
-        image: "{{ami}}"
-        instance_type: "{{instanceType}}"
-        wait: true
-        exact_count: 1
-        user_data: "{{ lookup('template', 'userdata/default_instance_user_data.yaml') }}"
-        vpc_subnet_id: "{{ vpc.subnets[1].id }}"
-        assign_public_ip: yes
-        volumes:
-          - device_name: /dev/xvda
-            volume_size: 30
-            delete_on_termination: true
-        count_tag:
-          Name: "ftstt{{clusterid}}-caw1b-eu-p"
-        instance_tags:
-          Name: "ftstt{{clusterid}}-caw1b-eu-p"
-          environment: "{{env}}"
-          ipCode: "{{ipcode}}"
-          systemCode: "{{systemCode}}"
-          description: "{{description}}"
-          teamDL: "{{teamDL}}"
-          stopSchedule: "nostop"
-          coco-environment-tag: "{{environment_tag}}"
-
-    - name: Provision m3.large instances
-      ec2:
-        aws_access_key: "{{ aws_access_key_id }}"
-        aws_secret_key: "{{ aws_secret_access_key }}"
-        region: "{{region}}"
-        group: "coreos-up-{{clusterid}}"
-        image: "{{ami}}"
-        instance_type: "{{instanceType}}"
-        wait: true
-        exact_count: 1
-        user_data: "{{ lookup('template', 'userdata/default_instance_user_data.yaml') }}"
-        vpc_subnet_id: "{{ vpc.subnets[2].id }}"
-        assign_public_ip: yes
-        volumes:
-          - device_name: /dev/xvda
-            volume_size: 30
-            delete_on_termination: true
-        count_tag:
-          Name: "ftstt{{clusterid}}-caw1c-eu-p"
-        instance_tags:
-          Name: "ftstt{{clusterid}}-caw1c-eu-p"
-          environment: "{{env}}"
-          ipCode: "{{ipcode}}"
-          systemCode: "{{systemCode}}"
-          description: "{{description}}"
-          teamDL: "{{teamDL}}"
-          stopSchedule: "nostop"
-          coco-environment-tag: "{{environment_tag}}"
-
     - set_fact:
         persistent_tag: 1
 
-    - name: Provision m3.large persistent instance
+    - name: Provision m4.xlarge persistent instance
       ec2:
         aws_access_key: "{{ aws_access_key_id }}"
         aws_secret_key: "{{ aws_secret_access_key }}"
@@ -241,7 +182,7 @@
             volume_size: 30
             delete_on_termination: true
           - device_name: /dev/xvdf
-            volume_size: 200
+            volume_size: 400
             delete_on_termination: true
         count_tag:
           Name: "ftpr1{{clusterid}}-caw1a-eu-p"
@@ -258,7 +199,7 @@
     - set_fact:
         persistent_tag: 2
       
-    - name: Provision m3.large persistent instance
+    - name: Provision m4.xlarge persistent instance
       ec2:
         aws_access_key: "{{ aws_access_key_id }}"
         aws_secret_key: "{{ aws_secret_access_key }}"
@@ -276,7 +217,7 @@
             volume_size: 30
             delete_on_termination: true
           - device_name: /dev/xvdf
-            volume_size: 200
+            volume_size: 400
             delete_on_termination: true
         count_tag:
           Name: "ftpr2{{clusterid}}-caw1b-eu-p"
@@ -293,7 +234,7 @@
     - set_fact:
         persistent_tag: 3
       
-    - name: Provision m3.large persistent instance
+    - name: Provision m4.xlarge persistent instance
       ec2:
         aws_access_key: "{{ aws_access_key_id }}"
         aws_secret_key: "{{ aws_secret_access_key }}"
@@ -311,7 +252,7 @@
             volume_size: 30
             delete_on_termination: true
           - device_name: /dev/xvdf
-            volume_size: 200
+            volume_size: 400
             delete_on_termination: true
         count_tag:
           Name: "ftpr3{{clusterid}}-caw1c-eu-p"

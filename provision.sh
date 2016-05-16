@@ -14,7 +14,7 @@ AMI=`curl -s https://coreos.com/dist/aws/aws-stable.json | jq -r '.["eu-west-1"]
   clusterid=$CLUSTERID \
   ami=$AMI \
   token=$TOKEN_URL \
-  services_definition_root_uri=${SERVICES_DEFINITION_ROOT_URI:=https://raw.githubusercontent.com/Financial-Times/up-service-files/master/} \
+  services_definition_root_uri=${SERVICES_DEFINITION_ROOT_URI:=https://raw.githubusercontent.com/Financial-Times/pub-service-files/master/} \
   aws_access_key_id=$AWS_ACCESS_KEY_ID \ 
   aws_secret_access_key=$AWS_SECRET_ACCESS_KEY \
   binary_writer_bucket=$BINARY_WRITER_BUCKET \
