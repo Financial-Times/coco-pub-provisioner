@@ -50,6 +50,7 @@ coreos:
           content: |
             [Service]
             Environment="DOCKER_OPTS=--log-driver=none"
+      command: start
     - name: swapon.service
       command: start
       content: |
@@ -75,6 +76,42 @@ coreos:
       command: start
     - name: fleet.service
       command: start
+    - name: key-register.service
+      command: start
+      content: |
+          [Unit]
+          Description=Add secret keys to etcd2
+          # Only run on first boot (creates the file at the end of the execution)
+          ConditionPathExists=!/var/lib/format-done
+
+          [Service]
+          Type=oneshot
+          ExecStartPre=/bin/sh -c "while true; do etcdctl cluster-health && break || sleep 2; done"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/cms-notifier/post-credentials '{{ cms_notifier_credentials }}'                      >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/elb_name 'coreos-up-{{clusterid}}'                                                  >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/varnish/htpasswd '{{ varnish_access_credentials }}'                                 >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/konstructor/api-key '{{ konstructor_api_key }}'                                     >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/wordpress/content_api_key '{{ wordpress_api_key }}'                                 >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/wp '{{ wp_contentApi_key }}'                                                        >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/environment_tag '{{environment_tag}}'                                                     >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/aws_region '{{region}}'                                                                   >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/splunk-forwarder/splunk_url 'https://ingest.splunk.glb.ft.com/coco-up/fleet'              >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/services-definition-root-uri '{{services_definition_root_uri}}'                           >/dev/null 2>&1 || true;"
+    - name: bootstrap.service
+      command: start
+      content: |
+          [Unit]
+          Description=Start fleet services
+          After=fleet.service
+          Requires=fleet.service
+          # Only run on first boot
+          ConditionPathExists=!/var/lib/format-done
+
+          [Service]
+          Type=oneshot
+          ExecStartPre=/bin/sh -c "while true; do etcdctl cluster-health && fleetctl list-units && break || sleep 5; done"
+          ExecStart=/bin/sh -c "curl -sSL --retry 5 --retry-delay 2 -o /tmp/deployer.service https://raw.githubusercontent.com/Financial-Times/coco-fleet-deployer/master/deployer.service && fleetctl start /tmp/deployer.service"
+          ExecStartPost=/usr/bin/touch /var/lib/format-done
     - name: makefs.service
       command: start
       content: |
