@@ -24,6 +24,5 @@ AMI=`curl -s https://coreos.com/dist/aws/aws-stable.json | jq -r '.["eu-west-1"]
   varnish_access_credentials=${CLUSTER_BASIC_HTTP_CREDENTIALS} \
   environment_tag=${ENVIRONMENT_TAG:=default} \
   tme_host=${TME_HOST:=default}" \
- 
   --vault-password-file=/vault.pass
 
