@@ -24,5 +24,6 @@ AMI=`curl -s https://coreos.com/dist/aws/aws-stable.json | jq -r '.["eu-west-1"]
   varnish_access_credentials=${CLUSTER_BASIC_HTTP_CREDENTIALS} \
   environment_tag=${ENVIRONMENT_TAG:=default} \
   tme_host=${TME_HOST:=tme.ft.com} \
-  brightcove_account_id=${BRIGHTCOVE_ACCOUNT_ID}" \
+  brightcove_account_id=${BRIGHTCOVE_ACCOUNT_ID} \
+  brightcove_auth=${BRIGHTCOVE_AUTH}" \
   --vault-password-file=/vault.pass
