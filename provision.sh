@@ -25,6 +25,8 @@ AMI=`curl -s https://coreos.com/dist/aws/aws-stable.json | jq -r '.["eu-west-1"]
   authors_bertha_url=${AUTHORS_BERTHA_URL} \
   roles_bertha_url=${ROLES_BERTHA_URL} \	  	  
   mappings_bertha_url=${MAPPINGS_BERTHA_URL} \
-  environment_tag=${ENVIRONMENT_TAG:=default}" \
+  environment_tag=${ENVIRONMENT_TAG:=default} \
+  tme_host=${TME_HOST:=tme.ft.com} \
+  brightcove_account_id=${BRIGHTCOVE_ACCOUNT_ID} \
+  brightcove_auth=${BRIGHTCOVE_AUTH}" \
   --vault-password-file=/vault.pass
-
