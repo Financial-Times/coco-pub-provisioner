@@ -22,6 +22,9 @@ AMI=`curl -s https://coreos.com/dist/aws/aws-stable.json | jq -r '.["eu-west-1"]
   coco_image_monitor_test_uuid=$COCO_MONITOR_TEST_UUID \
   bridging_message_queue_proxy=${BRIDGING_MESSAGE_QUEUE_PROXY:=https://kafka-proxy-iw-uk-p-1.glb.ft.com,https://kafka-proxy-iw-uk-p-2.glb.ft.com} \
   varnish_access_credentials=${CLUSTER_BASIC_HTTP_CREDENTIALS} \
+  authors_bertha_url=${AUTHORS_BERTHA_URL} \
+  roles_bertha_url=${ROLES_BERTHA_URL} \	  	  
+  mappings_bertha_url=${MAPPINGS_BERTHA_URL} \
   environment_tag=${ENVIRONMENT_TAG:=default} \
   tme_host=${TME_HOST:=tme.ft.com} \
   brightcove_account_id=${BRIGHTCOVE_ACCOUNT_ID} \
