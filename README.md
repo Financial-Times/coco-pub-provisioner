@@ -27,9 +27,9 @@ Set all the required variables
 ------------------------------
 
 ```bash
-## Get a new etcd token for a new cluster, 5 refers to the number of initial boxes in the cluster:
-## `curl https://discovery.etcd.io/new?size=5`
-export TOKEN_URL=`curl https://discovery.etcd.io/new?size=5`
+## Get a new etcd token for a new cluster, 3 refers to the number of initial boxes in the cluster:
+## `curl https://discovery.etcd.io/new?size=3`
+export TOKEN_URL=`curl https://discovery.etcd.io/new?size=3`
 
 ## Secret used during provision to decrypt keys - stored in LastPass.
 ## Lastpass: coco-provisioner-ansible-vault-pass
