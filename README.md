@@ -44,6 +44,9 @@ docker run \
     -e "MAPPINGS_BERTHA_URL=$MAPPINGS_BERTHA_URL" \
     coco/coco-pub-provisioner:v1.0.0
 
+## IMPORTANT NOTE: Due to some unknown reason setting BRIGHTCOVE_AUTH did not work as expected. Once the cluster is running
+## please check the etcd value for /ft/_credentials/brightcove_auth and correct it if necessary.
+
 ## If the cluster is running, set up HTTPS support (see below)
 ```
 
