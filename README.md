@@ -14,12 +14,46 @@ Set up SSH
 See [SSH_README.md](/SSH_README.md/)
 
 
+Provision a publishing cluster
+------------------------------
+
+```bash
+## Set all the environment variables required to provision a cluster. These variables are stored in LastPass
+## For PROD cluster
+## LastPass: Publishing cluster provisioning setup
+## For TEST cluster
+## LastPass: TEST Publishing cluster provisioning setup
+
+## Run docker command
+docker run \
+    -e "VAULT_PASS=$VAULT_PASS" \
+    -e "TOKEN_URL=$TOKEN_URL" \
+    -e "SERVICES_DEFINITION_ROOT_URI=$SERVICES_DEFINITION_ROOT_URI" \
+    -e "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
+    -e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
+    -e "ENVIRONMENT_TAG=$ENVIRONMENT_TAG" \
+    -e "AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION" \
+    -e "API_HOST=$API_HOST" \
+    -e "CLUSTER_BASIC_HTTP_CREDENTIALS=$CLUSTER_BASIC_HTTP_CREDENTIALS" \
+    -e "BRIGHTCOVE_ACCOUNT_ID=$BRIGHTCOVE_ACCOUNT_ID" \
+    -e "BRIGHTCOVE_AUTH=$BRIGHTCOVE_AUTH" \
+    -e "AUTHORS_BERTHA_URL=$AUTHORS_BERTHA_URL" \
+    -e "ROLES_BERTHA_URL=$ROLES_BERTHA_URL" \
+    -e "MAPPINGS_BERTHA_URL=$MAPPINGS_BERTHA_URL" \
+    coco/coco-pub-provisioner:v1.0.0
+
+## If the cluster is running, set up HTTPS support (see below)
+```
+
+Getting started
+---------------
+
 Building
 --------
 
 ```bash
 # Build the image
-docker build -t coco-pub-provisioner .
+docker build -t coco/coco-pub-provisioner .
 ```
 
 
@@ -27,6 +61,12 @@ Set all the required variables
 ------------------------------
 
 ```bash
+## You can also find all the setup stored in LastPass
+## For PROD cluster
+## LastPass: Publishing cluster provisioning setup
+## For TEST cluster
+## LastPass: TEST Publishing cluster provisioning setup
+
 ## Get a new etcd token for a new cluster, 3 refers to the number of initial boxes in the cluster:
 ## `curl https://discovery.etcd.io/new?size=3`
 export TOKEN_URL=`curl https://discovery.etcd.io/new?size=3`
@@ -95,7 +135,7 @@ docker run \
     -e "AUTHORS_BERTHA_URL=$AUTHORS_BERTHA_URL" \
     -e "ROLES_BERTHA_URL=$ROLES_BERTHA_URL" \
     -e "MAPPINGS_BERTHA_URL=$MAPPINGS_BERTHA_URL" \
-    coco-pub-provisioner
+    coco/coco-pub-provisioner
 ```
 
 
@@ -150,7 +190,7 @@ docker run \
   -e "AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION" \
   -e "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
   -e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
-  coco-provisioner /bin/bash /decom.sh
+  coco/coco-provisioner:v1.0.0 /bin/bash /decom.sh
 ```
 
 Sometimes cleanup takes a long time and ELBs/Security Groups still get left behind. Other ways to clean up:
