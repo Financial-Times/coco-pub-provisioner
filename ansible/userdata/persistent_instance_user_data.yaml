@@ -112,6 +112,7 @@ coreos:
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/bertha/urls/video-metadata-mappings '{{mappings_bertha_url}}'                             >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/tme_host '{{tme_host}}'                                                                   >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/brightcove/account-id '{{brightcove_account_id}}'                                         >/dev/null 2>&1 || true;"
+		  ExecStart=/bin/sh -c "./delivery_clusters_conf_setup.sh '{{delivery_clusters_conf}}'                                                  >/dev/null 2>&1 || true;"
 
     - name: bootstrap.service
       command: start
