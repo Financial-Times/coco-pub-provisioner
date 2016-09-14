@@ -20,7 +20,7 @@ CLUSTERID=`echo $TOKEN_URL | sed "s/http.*\///g" | cut -c1-8`
   coco_image_monitor_test_uuid=$COCO_MONITOR_TEST_UUID \
   bridging_message_queue_proxy=${BRIDGING_MESSAGE_QUEUE_PROXY:=https://kafka-proxy-iw-uk-p-1.glb.ft.com,https://kafka-proxy-iw-uk-p-2.glb.ft.com} \
   brightcove_account_id=${BRIGHTCOVE_ACCOUNT_ID} \
-  brightcove_auth=${BRIGHTCOVE_AUTH} \
+  brightcove_auth='${BRIGHTCOVE_AUTH}' \
   environment_tag=${ENVIRONMENT_TAG:=default} \
   tme_host=${TME_HOST:=default}" \
   --vault-password-file=/vault.pass
