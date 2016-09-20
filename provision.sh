@@ -35,6 +35,6 @@ echo $VAULT_PASS > /vault.pass && ansible-playbook -i ~/.ansible_hosts /ansible/
   tme_host=${TME_HOST:=tme.ft.com} \
   brightcove_account_id=${BRIGHTCOVE_ACCOUNT_ID} \
   brightcove_auth=${BRIGHTCOVE_AUTH} \
-  delivery-clusters-urls=${DELIVERY_CLUSTERS_URLS} \
-  delivery-clusters-http-credentials=${DELIVERY_CLUSTERS_HTTP_CREDENTIALS}" \
+  delivery_clusters_urls=${DELIVERY_CLUSTERS_URLS} \
+  delivery_clusters_http_credentials=${DELIVERY_CLUSTERS_HTTP_CREDENTIALS}" \
   --vault-password-file=/vault.pass

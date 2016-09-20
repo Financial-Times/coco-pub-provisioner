@@ -63,7 +63,7 @@ export DELIVERY_CLUSTERS_URLS='prod-uk:https://prod-uk.site.com/,prod-us:https:/
 
 # The following variable specifies HTTP credentials to communicate to delivery clusters.
 # The value should be specified by the following syntax: <env-tag1>:<username1>:<password1>,<env-tag2>:<username2>:<password2>,...,<env-tagN>:<usernameN>:<passwordN>
-export DELIVERY_CLUSTERS_HTTP_CREDENTIAL='prod-uk:user1:passwd1,prod-us:user2:passwd2'
+export DELIVERY_CLUSTERS_HTTP_CREDENTIALS='prod-uk:user1:passwd1,prod-us:user2:passwd2'
 
 # For publishing videos, the brightcove-notifier and brightcove-metadata-preprocessor must connect to the Brightcove API with an id like this: 47628783001
 export BRIGHTCOVE_ACCOUNT_ID=
