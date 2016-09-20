@@ -112,15 +112,8 @@ coreos:
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/bertha/urls/video-metadata-mappings '{{mappings_bertha_url}}'                             >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/tme_host '{{tme_host}}'                                                                   >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/brightcove/account-id '{{brightcove_account_id}}'                                         >/dev/null 2>&1 || true;"
-          ExecStart=/bin/sh -c "\
-              IFS='; ' read -r -a ENV_CONFIGS <<< '{{delivery_clusters_conf}}' ; \
-              for ENV_CONFIG in \"\${ENV_CONFIGS[@]}\" ; \
-              do  \
-                  IFS=', ' read -r -a CONFIG_DETAILS <<< \"\${ENV_CONFIG}\" ; \
-                  etcdctl mk /ft/config/publish-availability-monitor/delivery-environments/\${CONFIG_DETAILS[0]}/read-url  \${CONFIG_DETAILS[1]} >/dev/null 2>&1 || true; \
-                  etcdctl mk /ft/_credentials/coco-delivery/\${CONFIG_DETAILS[0]}/username  \${CONFIG_DETAILS[2]} >/dev/null 2>&1 || true; \
-                  etcdctl mk /ft/_credentials/coco-delivery/\${CONFIG_DETAILS[0]}/password  \${CONFIG_DETAILS[3]} >/dev/null 2>&1 || true; \
-              done ; "
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/read-urls '{{delivery-clusters-urls}}'                                         >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/publish-read/read-credentials '{{delivery-clusters-http-credentials}}'              >/dev/null 2>&1 || true;"
 
     - name: bootstrap.service
       command: start
