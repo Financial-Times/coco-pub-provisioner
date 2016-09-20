@@ -43,7 +43,7 @@ docker run \
     -e "ROLES_BERTHA_URL=$ROLES_BERTHA_URL" \
     -e "MAPPINGS_BERTHA_URL=$MAPPINGS_BERTHA_URL" \
     -e "FACTSET_USERNAME=$FACTSET_USERNAME" \
-    coco/coco-pub-provisioner:test
+    coco/coco-pub-provisioner:v1.0.0
 
 ## IMPORTANT NOTE: Due to some unknown reason setting BRIGHTCOVE_AUTH did not work as expected. Once the cluster is running
 ## please check the etcd value for /ft/_credentials/brightcove_auth and correct it if necessary.
