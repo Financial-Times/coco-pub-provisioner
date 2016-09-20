@@ -33,5 +33,6 @@ echo $VAULT_PASS > /vault.pass && ansible-playbook -i ~/.ansible_hosts /ansible/
   environment_tag=${ENVIRONMENT_TAG:=default} \
   tme_host=${TME_HOST:=tme.ft.com} \
   brightcove_account_id=${BRIGHTCOVE_ACCOUNT_ID} \
-  brightcove_auth=${BRIGHTCOVE_AUTH}" \
+  brightcove_auth=${BRIGHTCOVE_AUTH} \
+  factset_username=${FACTSET_USERNAME}" \
   --vault-password-file=/vault.pass

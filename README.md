@@ -42,10 +42,17 @@ docker run \
     -e "AUTHORS_BERTHA_URL=$AUTHORS_BERTHA_URL" \
     -e "ROLES_BERTHA_URL=$ROLES_BERTHA_URL" \
     -e "MAPPINGS_BERTHA_URL=$MAPPINGS_BERTHA_URL" \
-    coco/coco-pub-provisioner:v1.0.0
+    -e "FACTSET_USERNAME=$FACTSET_USERNAME" \
+    coco/coco-pub-provisioner:test
 
 ## IMPORTANT NOTE: Due to some unknown reason setting BRIGHTCOVE_AUTH did not work as expected. Once the cluster is running
 ## please check the etcd value for /ft/_credentials/brightcove_auth and correct it if necessary.
+
+## IMPORTANT NOTE: Because the Factset SSH key exceeds the maximum length of a service file line, this key has to be set manually.
+## Please run these commands from one of the cluster's machines, after provisioning:
+    export FACTSET_KEY=
+    etcdctl mk /ft/_credentials/factset/key "$FACTSET_KEY"
+## FACTSET_KEY can be found in Lastpass: Factset FTP.
 
 ## If the cluster is running, set up HTTPS support (see below)
 ```

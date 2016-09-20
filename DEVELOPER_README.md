@@ -43,7 +43,7 @@ export ENVIRONMENT_TAG=
 ## See Lastpass: 'CoCo Basic Auth' for current cluster values.
 export CLUSTER_BASIC_HTTP_CREDENTIALS=
 
-## Gateway content api hostname (not URL) to access UPP content that the cluster read endpoints (e.g. CPR & CPR-preview) are mapped to. 
+## Gateway content api hostname (not URL) to access UPP content that the cluster read endpoints (e.g. CPR & CPR-preview) are mapped to.
 ## Defaults to Prod if left blank.
 ## Prod: api.ft.com
 ## Pre-Prod: test.api.ft.com
@@ -66,6 +66,10 @@ export BRIGHTCOVE_AUTH=
 export AUTHORS_BERTHA_URL=http://bertha.site.example/123456XYZ/Authors
 export ROLES_BERTHA_URL=http://bertha.site.example/123456XYZ/Roles
 export MAPPINGS_BERTHA_URL=http://bertha.site.example/123456XYZ/Mapping
+
+## Credentials for Factset FTP server - stored in LastPass.
+## Lastpass: Factset FTP
+export FACTSET_USERNAME=
 ```
 
 Run the image
@@ -87,5 +91,6 @@ docker run \
     -e "AUTHORS_BERTHA_URL=$AUTHORS_BERTHA_URL" \
     -e "ROLES_BERTHA_URL=$ROLES_BERTHA_URL" \
     -e "MAPPINGS_BERTHA_URL=$MAPPINGS_BERTHA_URL" \
+    -e "FACTSET_USERNAMER=$FACTSET_USERNAME" \
     coco/coco-pub-provisioner
 ```
