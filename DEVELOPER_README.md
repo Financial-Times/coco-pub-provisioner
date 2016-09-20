@@ -22,7 +22,7 @@ Set all the required variables
 
 ## Get a new etcd token for a new cluster, 3 refers to the number of initial boxes in the cluster:
 ## `curl https://discovery.etcd.io/new?size=3`
-export TOKEN_URL=`curl https://discovery.etcd.io/new?size=3`
+export TOKEN_URL=`curl -s https://discovery.etcd.io/new?size=3`
 
 ## Secret used during provision to decrypt keys - stored in LastPass.
 ## Lastpass: coco-provisioner-ansible-vault-pass
@@ -38,6 +38,11 @@ export SERVICES_DEFINITION_ROOT_URI=https://raw.githubusercontent.com/Financial-
 
 ## make a unique identifier (this will be used for DNS tunnel, splunk, AWS tags)
 export ENVIRONMENT_TAG=
+
+## Set the FT environment type
+## For PROD: p
+## For TEST: t
+export ENVIRONMENT_TYPE=
 
 ## Comma separated username:password which will be used to authenticate(Basic auth) when connecting to the cluster over https.
 ## See Lastpass: 'CoCo Basic Auth' for current cluster values.
@@ -79,6 +84,7 @@ docker run \
     -e "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
     -e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
     -e "ENVIRONMENT_TAG=$ENVIRONMENT_TAG" \
+    -e "ENVIRONMENT_TYPE=$ENVIRONMENT_TYPE" \
     -e "AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION" \
     -e "API_HOST=$API_HOST" \
     -e "CLUSTER_BASIC_HTTP_CREDENTIALS=$CLUSTER_BASIC_HTTP_CREDENTIALS" \
