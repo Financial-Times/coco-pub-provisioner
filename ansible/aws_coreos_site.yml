@@ -2,7 +2,6 @@
   connection: local
 
   vars:
-    region: eu-west-1
     ami: ami-c26bcab1 #eu-west-1 HMV 835.9.0 (stable)
     #ami: ami-c3cae3b4 #eu-west-1 HMV CoreOS 815.0.0 (alpha)
     env: "{{ environment_type }}"
