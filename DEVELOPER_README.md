@@ -54,7 +54,7 @@ export CLUSTER_BASIC_HTTP_CREDENTIALS=
 ## Pre-Prod: test.api.ft.com
 export API_HOST=
 
-# Unused here, but useful in decomissioning.
+# Region to create the cluster.
 export AWS_DEFAULT_REGION=eu-west-1
 
 # The following variable specifies URLs for read access to the delivery clusters, which are required by publishing monitoring services.
@@ -83,6 +83,9 @@ export MAPPINGS_BERTHA_URL=http://bertha.site.example/123456XYZ/Mapping
 
 Run the image
 -------------
+
+Currently, attempting to provision a cluster in `us-east-1` with an environment type of `t` causes the security group creation to fail.
+Everything else works fine - `t` or `p` clusters in `eu-west-1`, and `p` clusters in `us-east-1`.
 
 ```bash
 docker run \
