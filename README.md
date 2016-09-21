@@ -13,7 +13,7 @@ Docker image to provision a cluster
 Tutorial
 --------
 
-If you're looking to provision a new pub cluster, the [tutorial](Tutorial.md) might be a better place to start than here. 
+If you're looking to provision a new pub cluster, the [tutorial](Tutorial.md) might be a better place to start than here.
 
 For developers
 --------------
@@ -53,7 +53,7 @@ docker run \
     -e "ROLES_BERTHA_URL=$ROLES_BERTHA_URL" \
     -e "MAPPINGS_BERTHA_URL=$MAPPINGS_BERTHA_URL" \
     -e "FACTSET_USERNAME=$FACTSET_USERNAME" \
-    coco/coco-pub-provisioner:v1.0.1
+    coco/coco-pub-provisioner:v1.0.3
 
 ## IMPORTANT NOTE: Due to some unknown reason setting BRIGHTCOVE_AUTH did not work as expected. Once the cluster is running
 ## please check the etcd value for /ft/_credentials/brightcove_auth and correct it if necessary.
@@ -68,28 +68,6 @@ docker run \
 ```
 
 If you need a Docker runtime environment to provision a cluster you can set up [Coco Management Server](https://github.com/Financial-Times/coco-pub-provisioner/blob/master/cloudformation/README.md) in AWS.
-
-Set up HTTPS support
---------------------
-
-To access URLs from the cluster through HTTPS, we need to add support for this in the load balancer of this cluster
-
-* log on to one of the machines in AWS
-* pick a HC url, like `foo-up.ft.com`, (where `foo` is the ENVIRONMENT_TAG you defined for this cluster) and execute `dig foo-up.ft.com`
-* the answer section will look something like this:
-
-```
-;; ANSWER SECTION:
-foo-up.ft.com.        600    IN    CNAME    bar1426.eu-west-1.elb.amazonaws.com.
-```
-
-* This is the ELB for the cluster on which the HC is running: `bar1426.eu-west-1.elb.amazonaws.com`
-
-* in the AWS console > EC2 > Load Balancers > search for the LB
-* click on it > Listeners > Edit > Add HTTPS on instance port `80`
-* to know which SSL certificate to choose, check what the LBs of other clusters (which have https enabled) are using
-* save and try if it works, ex. `https://foo-up.ft.com`
-* you can also remove HTTP support if needed
 
 Decommission an environment
 ---------------------------
@@ -120,7 +98,7 @@ docker run \
   -e "AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION" \
   -e "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
   -e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
-  coco/coco-pub-provisioner:v1.0.1 /bin/bash /decom.sh
+  coco/coco-pub-provisioner:v1.0.3 /bin/bash /decom.sh
 ```
 
 Sometimes cleanup takes a long time and ELBs/Security Groups still get left behind. Other ways to clean up:
