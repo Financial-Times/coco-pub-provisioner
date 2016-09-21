@@ -54,7 +54,7 @@ docker run \
     -e "AUTHORS_BERTHA_URL=$AUTHORS_BERTHA_URL" \
     -e "ROLES_BERTHA_URL=$ROLES_BERTHA_URL" \
     -e "MAPPINGS_BERTHA_URL=$MAPPINGS_BERTHA_URL" \
-    coco/coco-pub-provisioner:v1.0.3
+    coco/coco-pub-provisioner:v1.0.4
 
 ## IMPORTANT NOTE: Due to some unknown reason setting BRIGHTCOVE_AUTH did not work as expected. Once the cluster is running
 ## please check the etcd value for /ft/_credentials/brightcove_auth and correct it if necessary.
@@ -92,7 +92,7 @@ docker run \
   -e "AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION" \
   -e "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
   -e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
-  coco/coco-pub-provisioner:v1.0.3 /bin/bash /decom.sh
+  coco/coco-pub-provisioner:v1.0.4 /bin/bash /decom.sh
 ```
 
 Sometimes cleanup takes a long time and ELBs/Security Groups still get left behind. Other ways to clean up:
