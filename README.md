@@ -34,6 +34,7 @@ Provision a publishing cluster
 ## LastPass: PROD Publishing cluster provisioning setup
 ## For TEST cluster
 ## LastPass: TEST Publishing cluster provisioning setup
+## SET PAM_MAT_VALIDATION_URL  to be a request to correspoding delivery cluster MAT content-transform end point
 
 ## Run docker command
 docker run \
@@ -49,6 +50,8 @@ docker run \
     -e "CLUSTER_BASIC_HTTP_CREDENTIALS=$CLUSTER_BASIC_HTTP_CREDENTIALS" \
     -e "DELIVERY_CLUSTERS_URLS=$DELIVERY_CLUSTERS_URLS" \
     -e "DELIVERY_CLUSTERS_HTTP_CREDENTIALS=$DELIVERY_CLUSTERS_HTTP_CREDENTIALS" \
+    -e "S3_BUCKET=$S3_BUCKET" \
+    -e "PAM_MAT_VALIDATION_URL=$PAM_MAT_VALIDATION_URL" \
     -e "BRIGHTCOVE_ACCOUNT_ID=$BRIGHTCOVE_ACCOUNT_ID" \
     -e "BRIGHTCOVE_AUTH=$BRIGHTCOVE_AUTH" \
     -e "AUTHORS_BERTHA_URL=$AUTHORS_BERTHA_URL" \

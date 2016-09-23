@@ -65,6 +65,12 @@ export DELIVERY_CLUSTERS_URLS='prod-uk:https://prod-uk.site.com/,prod-us:https:/
 # The value should be specified by the following syntax: <env-tag1>:<username1>:<password1>,<env-tag2>:<username2>:<password2>,...,<env-tagN>:<usernameN>:<passwordN>
 export DELIVERY_CLUSTERS_HTTP_CREDENTIALS='prod-uk:user1:passwd1,prod-us:user2:passwd2'
 
+#The following variable is used by PAM to make publishing checks on images
+S3_BUCKET the value for  all non prod clusters  us the pre-prd bucket
+
+#to validate article are valid for publication
+PAM_MAT_VALIDATION_URL, the corresponding delivery cluster mat url for a given publish cluster.
+
 # For publishing videos, the brightcove-notifier and brightcove-metadata-preprocessor must connect to the Brightcove API with an id like this: 47628783001
 export BRIGHTCOVE_ACCOUNT_ID=
 
@@ -98,6 +104,8 @@ docker run \
     -e "CLUSTER_BASIC_HTTP_CREDENTIALS=$CLUSTER_BASIC_HTTP_CREDENTIALS" \
     -e "DELIVERY_CLUSTERS_URLS=$DELIVERY_CLUSTERS_URLS" \
     -e "DELIVERY_CLUSTERS_HTTP_CREDENTIALS=$DELIVERY_CLUSTERS_HTTP_CREDENTIALS" \
+    -e "S3_BUCKET=$S3_BUCKET" \
+    -e "PAM_MAT_VALIDATION_URL=$PAM_MAT_VALIDATION_URL" \
     -e "BRIGHTCOVE_ACCOUNT_ID=$BRIGHTCOVE_ACCOUNT_ID" \
     -e "BRIGHTCOVE_AUTH=$BRIGHTCOVE_AUTH" \
     -e "AUTHORS_BERTHA_URL=$AUTHORS_BERTHA_URL" \
