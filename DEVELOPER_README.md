@@ -66,7 +66,7 @@ export DELIVERY_CLUSTERS_URLS='prod-uk:https://prod-uk.site.com/,prod-us:https:/
 export DELIVERY_CLUSTERS_HTTP_CREDENTIALS='prod-uk:user1:passwd1,prod-us:user2:passwd2'
 
 #The following variable is used by PAM to make publishing checks on images
-S3_BUCKET the value for  all non prod clusters  us the pre-prd bucket
+S3_BUCKET the value for all non prod clusters is the pre-prod bucket
 
 #to validate article are valid for publication
 PAM_MAT_VALIDATION_URL, the corresponding delivery cluster mat url for a given publish cluster.
