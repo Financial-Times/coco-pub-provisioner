@@ -66,10 +66,12 @@ export DELIVERY_CLUSTERS_URLS='prod-uk:https://prod-uk.site.com/,prod-us:https:/
 export DELIVERY_CLUSTERS_HTTP_CREDENTIALS='prod-uk:user1:passwd1,prod-us:user2:passwd2'
 
 #The following variable is used by PAM to make publishing checks on images
-BINARY_S3_BUCKET the value for all non prod clusters is the pre-prod bucket
+#the value for all non prod clusters is the pre-prod bucket
+export BINARY_S3_BUCKET=
 
 #to validate article are valid for publication
-PAM_MAT_VALIDATION_URL, the corresponding delivery cluster mat url for a given publish cluster.
+#the corresponding delivery cluster mat url for a given publish cluster.
+export PAM_MAT_VALIDATION_URL=
 
 # For publishing videos, the brightcove-notifier and brightcove-metadata-preprocessor must connect to the Brightcove API with an id like this: 47628783001
 export BRIGHTCOVE_ACCOUNT_ID=
