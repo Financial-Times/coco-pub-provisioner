@@ -113,7 +113,7 @@ coreos:
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/tme_host '{{tme_host}}'                                                                   >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/brightcove/account-id '{{brightcove_account_id}}'                                         >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/read-urls '{{delivery_clusters_urls}}'                                         >/dev/null 2>&1 || true;"
-          ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/binary_s3-bucket '{{binary_s3_bucket}}'                                        >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/binary-s3-bucket '{{binary_s3_bucket}}'                                        >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/pam-mat-validation-url '{{pam_mat_validation_url}}'                            >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/publish-read/read-credentials '{{delivery_clusters_http_credentials}}'              >/dev/null 2>&1 || true;"
 
