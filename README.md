@@ -37,6 +37,7 @@ Everything else works fine - `t` or `p` clusters in `eu-west-1`, and `p` cluster
 ## LastPass: PROD Publishing cluster provisioning setup
 ## For TEST cluster
 ## LastPass: TEST Publishing cluster provisioning setup
+## SET PAM_MAT_VALIDATION_URL  to be a request to correspoding delivery cluster MAT content-transform end point
 
 ## Run docker command
 docker run \
@@ -52,12 +53,14 @@ docker run \
     -e "CLUSTER_BASIC_HTTP_CREDENTIALS=$CLUSTER_BASIC_HTTP_CREDENTIALS" \
     -e "DELIVERY_CLUSTERS_URLS=$DELIVERY_CLUSTERS_URLS" \
     -e "DELIVERY_CLUSTERS_HTTP_CREDENTIALS=$DELIVERY_CLUSTERS_HTTP_CREDENTIALS" \
+    -e "BINARY_S3_BUCKET=$BINARY_S3_BUCKET" \
+    -e "PAM_MAT_VALIDATION_URL=$PAM_MAT_VALIDATION_URL" \
     -e "BRIGHTCOVE_ACCOUNT_ID=$BRIGHTCOVE_ACCOUNT_ID" \
     -e "BRIGHTCOVE_AUTH=$BRIGHTCOVE_AUTH" \
     -e "AUTHORS_BERTHA_URL=$AUTHORS_BERTHA_URL" \
     -e "ROLES_BERTHA_URL=$ROLES_BERTHA_URL" \
     -e "MAPPINGS_BERTHA_URL=$MAPPINGS_BERTHA_URL" \
-    coco/coco-pub-provisioner:v1.0.7
+     coco/coco-pub-provisioner:v1.0.8
 
 ## If the cluster is running, set up HTTPS support (see below)
 ```
@@ -93,8 +96,9 @@ docker run \
   -e "AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION" \
   -e "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
   -e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
-  coco/coco-pub-provisioner:v1.0.7 /bin/bash /decom.sh
+  coco/coco-pub-provisioner:v1.0.8 /bin/bash /decom.sh
 ```
+
 
 Coco Management Server
 ---------------------------
