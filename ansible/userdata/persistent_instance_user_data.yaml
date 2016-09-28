@@ -117,7 +117,8 @@ coreos:
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/pam-mat-validation-url '{{pam_mat_validation_url}}'                            >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/publish-read/read-credentials '{{delivery_clusters_http_credentials}}'              >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/factset/username '{{ factset_username }}'                                           >/dev/null 2>&1 || true;"
-          ExecStart=/bin/sh -c "etcdctl set -- /ft/_credentials/factset/key '{{ factset_key }}'                                                 >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/factset/key/ying '{{ factset_key_ying }}'                                           >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/factset/key/yang '{{ factset_key_yang }}'                                           >/dev/null 2>&1 || true;"
 
     - name: bootstrap.service
       command: start
