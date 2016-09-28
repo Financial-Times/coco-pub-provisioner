@@ -50,10 +50,10 @@ coreos:
           WantedBy=timers.target
     - name: docker.service
       drop-ins:
-        - name: 10-turn-off-logging.conf
+        - name: 11-docker-opts.conf
           content: |
             [Service]
-            Environment="DOCKER_OPTS=--log-driver=none"
+            Environment="DOCKER_OPTS=--log-driver=none --host 0.0.0.0:2375"
       command: start
     - name: swapon.service
       command: start
@@ -112,6 +112,10 @@ coreos:
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/bertha/urls/video-metadata-mappings '{{mappings_bertha_url}}'                             >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/tme_host '{{tme_host}}'                                                                   >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/brightcove/account-id '{{brightcove_account_id}}'                                         >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/read-urls '{{delivery_clusters_urls}}'                                         >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/binary-s3-bucket '{{binary_s3_bucket}}'                                        >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/pam-mat-validation-url '{{pam_mat_validation_url}}'                            >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/publish-read/read-credentials '{{delivery_clusters_http_credentials}}'              >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/factset/username '{{ factset_username }}'                                           >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl set -- /ft/_credentials/factset/key '{{ factset_key }}'                                                 >/dev/null 2>&1 || true;"
 

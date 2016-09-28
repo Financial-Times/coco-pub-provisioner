@@ -28,12 +28,16 @@ See [SSH_README.md](/SSH_README.md/)
 Provision a publishing cluster
 ------------------------------
 
+Currently, attempting to provision a cluster in `us-east-1` with an environment type of `t` causes the security group creation to fail.
+Everything else works fine - `t` or `p` clusters in `eu-west-1`, and `p` clusters in `us-east-1`.
+
 ```bash
 ## Set all the environment variables required to provision a cluster. These variables are stored in LastPass
 ## For PROD cluster
 ## LastPass: PROD Publishing cluster provisioning setup
 ## For TEST cluster
 ## LastPass: TEST Publishing cluster provisioning setup
+## SET PAM_MAT_VALIDATION_URL  to be a request to correspoding delivery cluster MAT content-transform end point
 
 ## Run docker command
 docker run \
@@ -47,15 +51,16 @@ docker run \
     -e "AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION" \
     -e "API_HOST=$API_HOST" \
     -e "CLUSTER_BASIC_HTTP_CREDENTIALS=$CLUSTER_BASIC_HTTP_CREDENTIALS" \
+    -e "DELIVERY_CLUSTERS_URLS=$DELIVERY_CLUSTERS_URLS" \
+    -e "DELIVERY_CLUSTERS_HTTP_CREDENTIALS=$DELIVERY_CLUSTERS_HTTP_CREDENTIALS" \
+    -e "BINARY_S3_BUCKET=$BINARY_S3_BUCKET" \
+    -e "PAM_MAT_VALIDATION_URL=$PAM_MAT_VALIDATION_URL" \
     -e "BRIGHTCOVE_ACCOUNT_ID=$BRIGHTCOVE_ACCOUNT_ID" \
     -e "BRIGHTCOVE_AUTH=$BRIGHTCOVE_AUTH" \
     -e "AUTHORS_BERTHA_URL=$AUTHORS_BERTHA_URL" \
     -e "ROLES_BERTHA_URL=$ROLES_BERTHA_URL" \
     -e "MAPPINGS_BERTHA_URL=$MAPPINGS_BERTHA_URL" \
-    coco/coco-pub-provisioner:v1.0.3
-
-## IMPORTANT NOTE: Due to some unknown reason setting BRIGHTCOVE_AUTH did not work as expected. Once the cluster is running
-## please check the etcd value for /ft/_credentials/brightcove_auth and correct it if necessary.
+     coco/coco-pub-provisioner:v1.0.8
 
 ## If the cluster is running, set up HTTPS support (see below)
 ```
@@ -91,21 +96,9 @@ docker run \
   -e "AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION" \
   -e "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
   -e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
-  coco/coco-pub-provisioner:v1.0.3 /bin/bash /decom.sh
+  coco/coco-pub-provisioner:v1.0.8 /bin/bash /decom.sh
 ```
 
-Sometimes cleanup takes a long time and ELBs/Security Groups still get left behind. Other ways to clean up:
-
-```sh
-# List all coreos security groups
-aws ec2 describe-security-groups | jq -r '.SecurityGroups[] | .GroupName + " " + .GroupId' | grep coreos
-
-# Delete coreos security groups not in use, does not filter - will fail on any group that is being used
-aws ec2 describe-security-groups | jq -r '.SecurityGroups[] | .GroupName + " " + .GroupId' | grep coreos | awk '{print $2}' | xargs -I {} -n1 sh -c 'aws ec2 delete-security-group --group-id {} || echo {} is active'
-
-# Delete ELBs that have no instances AND there are no instances with the same group name (stopped) as the ELB
-aws elb describe-load-balancers | jq -r '.LoadBalancerDescriptions[] | select(.Instances==[]) | .LoadBalancerName' | grep coreos | xargs -I {} sh -c "aws ec2 describe-instances --filters "Name=tag-key,Values=coco-environment-tag" | jq -e '.Reservations[].Instances[].SecurityGroups[] | select(.GroupName==\"{}\")' >/dev/null 2>&1 || echo {}" | xargs -n1 -I {} aws elb delete-load-balancer --load-balancer-name {}
-```
 
 Coco Management Server
 ---------------------------

@@ -2,7 +2,6 @@
   connection: local
 
   vars:
-    region: eu-west-1
     ami: ami-c26bcab1 #eu-west-1 HMV 835.9.0 (stable)
     #ami: ami-c3cae3b4 #eu-west-1 HMV CoreOS 815.0.0 (alpha)
     env: "{{ environment_type }}"
@@ -198,9 +197,11 @@
         volumes:
           - device_name: /dev/xvda
             volume_size: 30
+            volume_type: gp2
             delete_on_termination: true
           - device_name: /dev/xvdf
             volume_size: 400
+            volume_type: gp2
             delete_on_termination: true
         count_tag:
           Name: "ftpr1{{clusterid}}-caw1a-eu-p"
@@ -233,9 +234,11 @@
         volumes:
           - device_name: /dev/xvda
             volume_size: 30
+            volume_type: gp2
             delete_on_termination: true
           - device_name: /dev/xvdf
             volume_size: 400
+            volume_type: gp2
             delete_on_termination: true
         count_tag:
           Name: "ftpr2{{clusterid}}-caw1b-eu-p"
@@ -268,9 +271,11 @@
         volumes:
           - device_name: /dev/xvda
             volume_size: 30
+            volume_type: gp2
             delete_on_termination: true
           - device_name: /dev/xvdf
             volume_size: 400
+            volume_type: gp2
             delete_on_termination: true
         count_tag:
           Name: "ftpr3{{clusterid}}-caw1c-eu-p"
@@ -283,3 +288,7 @@
           teamDL: "{{teamDL}}"
           stopSchedule: "nostop"
           coco-environment-tag: "{{environment_tag}}"
+
+    - name: Cluster tunnel DNS address
+      debug: msg="Cluster tunnel DNS address - {{ environment_tag }}-tunnel-up.ft.com"
+
