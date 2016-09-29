@@ -64,7 +64,7 @@ docker run \
     -e "AUTHORS_BERTHA_URL=$AUTHORS_BERTHA_URL" \
     -e "ROLES_BERTHA_URL=$ROLES_BERTHA_URL" \
     -e "MAPPINGS_BERTHA_URL=$MAPPINGS_BERTHA_URL" \
-     coco/coco-pub-provisioner:v1.0.9
+     coco/coco-pub-provisioner:v1.0.10
 
 ## If the cluster is running, set up HTTPS support (see below)
 ```
