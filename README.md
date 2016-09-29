@@ -1,4 +1,4 @@
- [![GitHub release](https://img.shields.io/badge/version-v1.0.9-green.svg?style=flat)](https://github.com/Financial-Times/coco-pub-provisioner/releases)
+ [![GitHub release](https://img.shields.io/badge/version-v1.0.10-green.svg?style=flat)](https://github.com/Financial-Times/coco-pub-provisioner/releases)
 
 Docker image to provision a cluster
 ===================================
