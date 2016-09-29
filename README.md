@@ -20,6 +20,8 @@ For developers
 
 If you want to adjust provisioner's code, see [the developer readme](DEVELOPER_README.md) AND [the change process for provisioner](https://sites.google.com/a/ft.com/technology/systems/dynamic-semantic-publishing/coco/change-process-for-provisioner)
 
+If you want to set keys in the vault which are multiline or too long, see [the current workaround](LONG_AND_MULTILINE_KEYS.md).
+
 Set up SSH
 ----------
 
