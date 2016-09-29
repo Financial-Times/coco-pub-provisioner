@@ -14,7 +14,8 @@ Workaround:
 4. set the pieces as different keys in etcd in cloudconfig
 5. concatenate the keys and base64 decode it in the unit files
 
-e.g. 
+e.g.
+ 
     ENCODED=`cat ~/.ssh/id_rsa | base64 | tr -d "\n"`
     LENGTH=`echo ${#ENCODED}`
     FIRST_PART=${ENCODED::LENGTH/2}

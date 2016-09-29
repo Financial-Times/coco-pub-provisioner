@@ -21,7 +21,6 @@ provision:
     	-e "AUTHORS_BERTHA_URL=$(AUTHORS_BERTHA_URL)" \
     	-e "ROLES_BERTHA_URL=$(ROLES_BERTHA_URL)" \
     	-e "MAPPINGS_BERTHA_URL=$(MAPPINGS_BERTHA_URL)" \
-	-e "FACTSET_USERNAME=$(FACTSET_USERNAME)" \
 	ft/coco-pub-provisioner:latest
 
 decom:
