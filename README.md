@@ -15,12 +15,14 @@ Docker image to provision a cluster
 Tutorial
 --------
 
-If you're looking to provision a new pub cluster, the [tutorial](Tutorial.md) might be a better place to start than here. 
+If you're looking to provision a new pub cluster, the [tutorial](Tutorial.md) might be a better place to start than here.
 
 For developers
 --------------
 
 If you want to adjust provisioner's code, see [the developer readme](DEVELOPER_README.md) AND [the change process for provisioner](https://sites.google.com/a/ft.com/technology/systems/dynamic-semantic-publishing/coco/change-process-for-provisioner)
+
+If you want to set keys in the vault which are multiline or too long, see [the current workaround](LONG_AND_MULTILINE_KEYS.md).
 
 Set up SSH
 ----------
@@ -62,7 +64,7 @@ docker run \
     -e "AUTHORS_BERTHA_URL=$AUTHORS_BERTHA_URL" \
     -e "ROLES_BERTHA_URL=$ROLES_BERTHA_URL" \
     -e "MAPPINGS_BERTHA_URL=$MAPPINGS_BERTHA_URL" \
-     coco/coco-pub-provisioner:v1.0.9
+     coco/coco-pub-provisioner:v1.0.10
 
 ## If the cluster is running, set up HTTPS support (see below)
 ```

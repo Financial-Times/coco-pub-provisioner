@@ -48,7 +48,7 @@ export ENVIRONMENT_TYPE=
 ## See Lastpass: 'CoCo Basic Auth' for current cluster values.
 export CLUSTER_BASIC_HTTP_CREDENTIALS=
 
-## Gateway content api hostname (not URL) to access UPP content that the cluster read endpoints (e.g. CPR & CPR-preview) are mapped to. 
+## Gateway content api hostname (not URL) to access UPP content that the cluster read endpoints (e.g. CPR & CPR-preview) are mapped to.
 ## Defaults to Prod if left blank.
 ## Prod: api.ft.com
 ## Pre-Prod: test.api.ft.com
