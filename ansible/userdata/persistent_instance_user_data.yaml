@@ -118,7 +118,6 @@ coreos:
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/synthetic-article-uuid '{{synthetic_article_uuid}}'                            >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/synthetic-article-payload '{{synthetic_article_payload}}'                      >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/synthetic-list-uuid '{{synthetic_list_uuid}}'                                  >/dev/null 2>&1 || true;"
-          ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/synthetic-list-payload '{{synthetic_list_payload}}'                            >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/publish-read/read-credentials '{{delivery_clusters_http_credentials}}'              >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/factset/username '{{ factset_username }}'                                           >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/factset/key/ying '{{ factset_key_ying }}'                                           >/dev/null 2>&1 || true;"

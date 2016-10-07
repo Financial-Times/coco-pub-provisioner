@@ -81,11 +81,10 @@ export BRIGHTCOVE_ACCOUNT_ID=
 export BRIGHTCOVE_AUTH=
 
 # The following variables are used by synthetic-article-publication-monitor and synthetic-list-publication-monitor in order to check the publication pipeline for articles and lists.
-# The variables specify UUIDs and payloads that should be used to create synthetic publications by the to services.
+# The variables specify UUIDs and payloads that should be used to create synthetic publications by the two services.
 export SYNTHETIC_ARTICLE_UUID=
 export SYNTHETIC_ARTICLE_PAYLOAD=
 export SYNTHETIC_LIST_UUID=
-export SYNTHETIC_LIST_PAYLOAD=
 
 ##URLs to Bertha endpoints for accessing to specific Google Spreadsheet data. Used in publishing cluster
 ##AUTHORS_BERTHA_URL refers to the spreadsheet of curated authors data.
@@ -121,7 +120,6 @@ docker run \
     -e "SYNTHETIC_ARTICLE_UUID=$SYNTHETIC_ARTICLE_UUID" \
     -e "SYNTHETIC_ARTICLE_PAYLOAD=$SYNTHETIC_ARTICLE_PAYLOAD" \
     -e "SYNTHETIC_LIST_UUID=$SYNTHETIC_LIST_UUID" \
-    -e "SYNTHETIC_LIST_PAYLOAD=$SYNTHETIC_LIST_PAYLOAD" \
     -e "BRIGHTCOVE_ACCOUNT_ID=$BRIGHTCOVE_ACCOUNT_ID" \
     -e "BRIGHTCOVE_AUTH=$BRIGHTCOVE_AUTH" \
     -e "AUTHORS_BERTHA_URL=$AUTHORS_BERTHA_URL" \

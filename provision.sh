@@ -41,6 +41,5 @@ echo $VAULT_PASS > /vault.pass && ansible-playbook -i ~/.ansible_hosts /ansible/
   pam_mat_validation_url=${PAM_MAT_VALIDATION_URL} \
   synthetic_article_uuid=${SYNTHETIC_ARTICLE_UUID} \
   synthetic_article_payload=${SYNTHETIC_ARTICLE_PAYLOAD:=/com/ft/syntheticpublicationmonitor/templates/article-payload.json} \
-  synthetic_list_uuid=${SYNTHETIC_LIST_UUID} \
-  synthetic_list_payload=${SYNTHETIC_LIST_PAYLOAD:=/com/ft/syntheticpublicationmonitor/templates/list-payload.json}" \
+  synthetic_list_uuid=${SYNTHETIC_LIST_UUID}" \
   --vault-password-file=/vault.pass
