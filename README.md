@@ -59,12 +59,15 @@ docker run \
     -e "DELIVERY_CLUSTERS_HTTP_CREDENTIALS=$DELIVERY_CLUSTERS_HTTP_CREDENTIALS" \
     -e "BINARY_S3_BUCKET=$BINARY_S3_BUCKET" \
     -e "PAM_MAT_VALIDATION_URL=$PAM_MAT_VALIDATION_URL" \
+    -e "SYNTHETIC_ARTICLE_UUID=$SYNTHETIC_ARTICLE_UUID" \
+    -e "SYNTHETIC_ARTICLE_PAYLOAD=$SYNTHETIC_ARTICLE_PAYLOAD" \
+    -e "SYNTHETIC_LIST_UUID=$SYNTHETIC_LIST_UUID" \
     -e "BRIGHTCOVE_ACCOUNT_ID=$BRIGHTCOVE_ACCOUNT_ID" \
     -e "BRIGHTCOVE_AUTH=$BRIGHTCOVE_AUTH" \
     -e "AUTHORS_BERTHA_URL=$AUTHORS_BERTHA_URL" \
     -e "ROLES_BERTHA_URL=$ROLES_BERTHA_URL" \
     -e "MAPPINGS_BERTHA_URL=$MAPPINGS_BERTHA_URL" \
-     coco/coco-pub-provisioner:v1.0.15
+     coco/coco-pub-provisioner:v1.0.16
 
 ## If the cluster is running, set up HTTPS support (see below)
 ```
@@ -100,7 +103,7 @@ docker run \
   -e "AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION" \
   -e "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
   -e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
-  coco/coco-pub-provisioner:v1.0.15 /bin/bash /decom.sh
+  coco/coco-pub-provisioner:v1.0.16 /bin/bash /decom.sh
 ```
 
 
