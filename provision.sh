@@ -20,7 +20,7 @@ echo $VAULT_PASS > /vault.pass && ansible-playbook -i ~/.ansible_hosts /ansible/
   region=$AWS_DEFAULT_REGION \
   token=$TOKEN_URL \
   services_definition_root_uri=${SERVICES_DEFINITION_ROOT_URI:=https://raw.githubusercontent.com/Financial-Times/pub-service-files/master/} \
-  aws_access_key_id=$AWS_ACCESS_KEY_ID \ 
+  aws_access_key_id=$AWS_ACCESS_KEY_ID \
   aws_secret_access_key=$AWS_SECRET_ACCESS_KEY \
   binary_writer_bucket=$BINARY_WRITER_BUCKET \
   aws_image_monitor_test_uuid=$AWS_MONITOR_TEST_UUID \
@@ -28,7 +28,7 @@ echo $VAULT_PASS > /vault.pass && ansible-playbook -i ~/.ansible_hosts /ansible/
   bridging_message_queue_proxy=${BRIDGING_MESSAGE_QUEUE_PROXY:=https://kafka-proxy-iw-uk-p-1.glb.ft.com,https://kafka-proxy-iw-uk-p-2.glb.ft.com} \
   varnish_access_credentials=${CLUSTER_BASIC_HTTP_CREDENTIALS} \
   authors_bertha_url=${AUTHORS_BERTHA_URL} \
-  roles_bertha_url=${ROLES_BERTHA_URL} \	  	  
+  roles_bertha_url=${ROLES_BERTHA_URL} \
   mappings_bertha_url=${MAPPINGS_BERTHA_URL} \
   environment_tag=${ENVIRONMENT_TAG:=default} \
   environment_type=${ENVIRONMENT_TYPE:=p} \
@@ -41,5 +41,7 @@ echo $VAULT_PASS > /vault.pass && ansible-playbook -i ~/.ansible_hosts /ansible/
   pam_mat_validation_url=${PAM_MAT_VALIDATION_URL} \
   synthetic_article_uuid=${SYNTHETIC_ARTICLE_UUID} \
   synthetic_article_payload=${SYNTHETIC_ARTICLE_PAYLOAD:=/com/ft/syntheticpublicationmonitor/templates/article-payload.json} \
-  synthetic_list_uuid=${SYNTHETIC_LIST_UUID}" \
+  synthetic_list_uuid=${SYNTHETIC_LIST_UUID} \
+  splunk_hec_url=${SPLUNK_HEC_URL:=https://http-inputs-financialtimes.splunkcloud.com/services/collector/event} \
+  splunk_hec_token=${SPLUNK_HEC_TOKEN}" \
   --vault-password-file=/vault.pass

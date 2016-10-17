@@ -44,6 +44,7 @@ Everything else works fine - `t` or `p` clusters in `eu-west-1`, and `p` cluster
 ## SET PAM_MAT_VALIDATION_URL  to be a request to correspoding delivery cluster MAT content-transform end point
 
 ## Run docker command
+docker pull coco/coco-pub-provisioner:latest
 docker run \
     -e "VAULT_PASS=$VAULT_PASS" \
     -e "TOKEN_URL=$TOKEN_URL" \
@@ -67,7 +68,8 @@ docker run \
     -e "AUTHORS_BERTHA_URL=$AUTHORS_BERTHA_URL" \
     -e "ROLES_BERTHA_URL=$ROLES_BERTHA_URL" \
     -e "MAPPINGS_BERTHA_URL=$MAPPINGS_BERTHA_URL" \
-     coco/coco-pub-provisioner:v1.0.18
+    -e "SPLUNK_HEC_TOKEN=$SPLUNK_HEC_TOKEN" \
+     coco/coco-pub-provisioner:latest
 
 ## If the cluster is running, set up HTTPS support (see below)
 ```
@@ -97,13 +99,14 @@ export ENVIRONMENT_TAG=
 
 
 ```sh
+docker pull coco/coco-pub-provisioner:latest
 docker run \
   -e "VAULT_PASS=$VAULT_PASS" \
   -e "ENVIRONMENT_TAG=$ENVIRONMENT_TAG" \
   -e "AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION" \
   -e "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
   -e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
-  coco/coco-pub-provisioner:v1.0.18 /bin/bash /decom.sh
+  coco/coco-pub-provisioner:latest /bin/bash /decom.sh
 ```
 
 
