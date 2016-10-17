@@ -43,5 +43,5 @@ echo $VAULT_PASS > /vault.pass && ansible-playbook -i ~/.ansible_hosts /ansible/
   synthetic_article_payload=${SYNTHETIC_ARTICLE_PAYLOAD:=/com/ft/syntheticpublicationmonitor/templates/article-payload.json} \
   synthetic_list_uuid=${SYNTHETIC_LIST_UUID} \
   splunk_hec_url=${SPLUNK_HEC_URL:=https://http-inputs-financialtimes.splunkcloud.com/services/collector/event} \
-  splunk_hec_token=${SPLUNK_HEC_TOKEN}" \  
+  splunk_hec_token=${SPLUNK_HEC_TOKEN}" \
   --vault-password-file=/vault.pass
