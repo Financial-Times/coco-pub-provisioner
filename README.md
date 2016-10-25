@@ -43,7 +43,8 @@ Everything else works fine - `t` or `p` clusters in `eu-west-1`, and `p` cluster
 ## LastPass: TEST Publishing cluster provisioning setup
 ## SET PAM_MAT_VALIDATION_URL  to be a request to correspoding delivery cluster MAT content-transform end point
 
-## Run docker command
+## Pull latest stable image and run docker command
+docker pull coco/coco-pub-provisioner:latest
 docker run \
     -e "VAULT_PASS=$VAULT_PASS" \
     -e "TOKEN_URL=$TOKEN_URL" \
@@ -67,9 +68,10 @@ docker run \
     -e "AUTHORS_BERTHA_URL=$AUTHORS_BERTHA_URL" \
     -e "ROLES_BERTHA_URL=$ROLES_BERTHA_URL" \
     -e "MAPPINGS_BERTHA_URL=$MAPPINGS_BERTHA_URL" \
-     coco/coco-pub-provisioner:v1.0.18
+     coco/coco-pub-provisioner:latest
 
-## If the cluster is running, set up HTTPS support (see below)
+## Note - if you require a specific version of the docker image, you can replace 'latest' with 'v1.0.17'
+
 ```
 
 If you need a Docker runtime environment to provision a cluster you can set up [Coco Management Server](https://github.com/Financial-Times/coco-pub-provisioner/blob/master/cloudformation/README.md) in AWS.
@@ -97,13 +99,17 @@ export ENVIRONMENT_TAG=
 
 
 ```sh
+docker pull coco/coco-pub-provisioner:latest
 docker run \
   -e "VAULT_PASS=$VAULT_PASS" \
   -e "ENVIRONMENT_TAG=$ENVIRONMENT_TAG" \
   -e "AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION" \
   -e "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
   -e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
-  coco/coco-pub-provisioner:v1.0.18 /bin/bash /decom.sh
+  coco/coco-pub-provisioner:latest /bin/bash /decom.sh
+
+## Note - if you require a specific version of the docker image, you can replace 'latest' with 'v1.0.17'
+
 ```
 
 
