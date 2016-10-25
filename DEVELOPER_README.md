@@ -73,6 +73,10 @@ export BINARY_S3_BUCKET=
 #the corresponding delivery cluster mat url for a given publish cluster.
 export PAM_MAT_VALIDATION_URL=
 
+#The HTTP credentials for calling the validation URL.
+#Format: <username>:<password>
+export PAM_MAT_VALIDATION_CREDENTIALS=
+
 # For publishing videos, the brightcove-notifier and brightcove-metadata-preprocessor must connect to the Brightcove API with an id like this: 47628783001
 export BRIGHTCOVE_ACCOUNT_ID=
 
@@ -117,6 +121,7 @@ docker run \
     -e "DELIVERY_CLUSTERS_HTTP_CREDENTIALS=$DELIVERY_CLUSTERS_HTTP_CREDENTIALS" \
     -e "BINARY_S3_BUCKET=$BINARY_S3_BUCKET" \
     -e "PAM_MAT_VALIDATION_URL=$PAM_MAT_VALIDATION_URL" \
+    -e "PAM_MAT_VALIDATION_CREDENTIALS=$PAM_MAT_VALIDATION_CREDENTIALS" \
     -e "SYNTHETIC_ARTICLE_UUID=$SYNTHETIC_ARTICLE_UUID" \
     -e "SYNTHETIC_ARTICLE_PAYLOAD=$SYNTHETIC_ARTICLE_PAYLOAD" \
     -e "SYNTHETIC_LIST_UUID=$SYNTHETIC_LIST_UUID" \
