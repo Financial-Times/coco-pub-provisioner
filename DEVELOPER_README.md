@@ -61,6 +61,11 @@ export AWS_DEFAULT_REGION=eu-west-1
 # The value should be specified by the following syntax: <env-tag1>:<delivery-cluster-url1>,<env-tag2>:<delivery-cluster-url2>,...,<env-tagN>:<delivery-cluster-urlN>
 export DELIVERY_CLUSTERS_URLS='prod-uk:https://prod-uk.site.com/,prod-us:https://prod-uk.site.com/'
 
+# The following variable is similar to the one above, specifying URL to S3 buckets required for image binary publish monitoring checks.
+# The value should be specified by the following syntax: <env-tag1>:<s3-url1>,<env-tag2>:<s3-url2>,...,<env-tagN>:<s3-urlN>
+# Note: the <env-tag1>, <env-tag2>,...,<env-tagN> should be the same as for DELIVERY_CLUSTERS_URLS environment variable
+export S3_IMAGE_BUCKET_URLS='prod-uk:http://com.ft.imagepublish.prod.s3.amazonaws.com/,prod-us:http://com.ft.imagepublish.prod-us.s3.amazonaws.com/'
+
 # The following variable specifies HTTP credentials to communicate to delivery clusters.
 # The value should be specified by the following syntax: <env-tag1>:<username1>:<password1>,<env-tag2>:<username2>:<password2>,...,<env-tagN>:<usernameN>:<passwordN>
 export DELIVERY_CLUSTERS_HTTP_CREDENTIALS='prod-uk:user1:passwd1,prod-us:user2:passwd2'
@@ -118,6 +123,7 @@ docker run \
     -e "API_HOST=$API_HOST" \
     -e "CLUSTER_BASIC_HTTP_CREDENTIALS=$CLUSTER_BASIC_HTTP_CREDENTIALS" \
     -e "DELIVERY_CLUSTERS_URLS=$DELIVERY_CLUSTERS_URLS" \
+    -e "S3_IMAGE_BUCKET_URLS=$S3_IMAGE_BUCKET_URLS" \
     -e "DELIVERY_CLUSTERS_HTTP_CREDENTIALS=$DELIVERY_CLUSTERS_HTTP_CREDENTIALS" \
     -e "BINARY_S3_BUCKET=$BINARY_S3_BUCKET" \
     -e "PAM_MAT_VALIDATION_URL=$PAM_MAT_VALIDATION_URL" \

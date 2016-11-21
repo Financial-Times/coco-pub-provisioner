@@ -36,6 +36,7 @@ echo $VAULT_PASS > /vault.pass && ansible-playbook -i ~/.ansible_hosts /ansible/
   brightcove_account_id=${BRIGHTCOVE_ACCOUNT_ID} \
   brightcove_auth='${BRIGHTCOVE_AUTH}' \
   delivery_clusters_urls=${DELIVERY_CLUSTERS_URLS} \
+  s3_image_bucket_urls=${S3_IMAGE_BUCKET_URLS} \
   delivery_clusters_http_credentials=${DELIVERY_CLUSTERS_HTTP_CREDENTIALS}\
   binary_s3_bucket=${BINARY_S3_BUCKET} \
   pam_mat_validation_url=${PAM_MAT_VALIDATION_URL} \
