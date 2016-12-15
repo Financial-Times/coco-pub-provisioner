@@ -69,6 +69,7 @@ docker run \
     -e "BRIGHTCOVE_AUTH=$BRIGHTCOVE_AUTH" \
     -e "AUTHORS_BERTHA_URL=$AUTHORS_BERTHA_URL" \
     -e "ROLES_BERTHA_URL=$ROLES_BERTHA_URL" \
+    -e "BRANDS_BERTHA_URL=$BRANDS_BERTHA_URL" \
     -e "MAPPINGS_BERTHA_URL=$MAPPINGS_BERTHA_URL" \
      coco/coco-pub-provisioner:latest
 

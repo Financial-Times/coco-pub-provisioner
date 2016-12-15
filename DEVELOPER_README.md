@@ -98,9 +98,11 @@ export SYNTHETIC_LIST_UUID=
 ##URLs to Bertha endpoints for accessing to specific Google Spreadsheet data. Used in publishing cluster
 ##AUTHORS_BERTHA_URL refers to the spreadsheet of curated authors data.
 ##ROLES_BERTHA_URL refers to the spreadsheet of roles for curated authors.
+##BRANDS_BERTHA_URL refers to the spreadsheet of roles for curated brands.
 ##MAPPINGS_BERTHA_URL refers to the spreadsheet of mappings between Brightcove video tags and TME IDs
 export AUTHORS_BERTHA_URL=http://bertha.site.example/123456XYZ/Authors
 export ROLES_BERTHA_URL=http://bertha.site.example/123456XYZ/Roles
+export BRANDS_BERTHA_URL=http://bertha.site.example/123456XYZ/Brands
 export MAPPINGS_BERTHA_URL=http://bertha.site.example/123456XYZ/Mapping
 ```
 
@@ -135,6 +137,7 @@ docker run \
     -e "BRIGHTCOVE_AUTH=$BRIGHTCOVE_AUTH" \
     -e "AUTHORS_BERTHA_URL=$AUTHORS_BERTHA_URL" \
     -e "ROLES_BERTHA_URL=$ROLES_BERTHA_URL" \
+    -e "BRANDS_BERTHA_URL=$BRANDS_BERTHA_URL" \
     -e "MAPPINGS_BERTHA_URL=$MAPPINGS_BERTHA_URL" \
     coco/coco-pub-provisioner
 ```
