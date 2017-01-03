@@ -82,7 +82,7 @@ export PAM_MAT_VALIDATION_URL=
 #Format: <username>:<password>
 export PAM_MAT_VALIDATION_CREDENTIALS=
 
-#to validate contnt placeholders (link-files) are valid for publication
+#to validate content placeholders (link-files) are valid for publication
 #the corresponding delivery cluster mcpm url for a given publish cluster.
 export PAM_MCPM_VALIDATION_URL=
 
