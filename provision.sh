@@ -41,6 +41,7 @@ echo $VAULT_PASS > /vault.pass && ansible-playbook -i ~/.ansible_hosts /ansible/
   delivery_clusters_http_credentials=${DELIVERY_CLUSTERS_HTTP_CREDENTIALS}\
   binary_s3_bucket=${BINARY_S3_BUCKET} \
   pam_mat_validation_url=${PAM_MAT_VALIDATION_URL} \
+  pam_mcpm_validation_url=${PAM_MCPM_VALIDATION_URL} \
   pam_mat_validation_credentials=${PAM_MAT_VALIDATION_CREDENTIALS} \
   synthetic_article_uuid=${SYNTHETIC_ARTICLE_UUID} \
   synthetic_article_payload=${SYNTHETIC_ARTICLE_PAYLOAD:=/com/ft/syntheticpublicationmonitor/templates/article-payload.json} \

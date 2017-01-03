@@ -82,6 +82,11 @@ export PAM_MAT_VALIDATION_URL=
 #Format: <username>:<password>
 export PAM_MAT_VALIDATION_CREDENTIALS=
 
+#to validate content placeholders (link-files) are valid for publication
+#the corresponding delivery cluster mcpm url for a given publish cluster.
+export PAM_MCPM_VALIDATION_URL=
+
+
 # For publishing videos, the brightcove-notifier and brightcove-metadata-preprocessor must connect to the Brightcove API with an id like this: 47628783001
 export BRIGHTCOVE_ACCOUNT_ID=
 
@@ -130,6 +135,7 @@ docker run \
     -e "BINARY_S3_BUCKET=$BINARY_S3_BUCKET" \
     -e "PAM_MAT_VALIDATION_URL=$PAM_MAT_VALIDATION_URL" \
     -e "PAM_MAT_VALIDATION_CREDENTIALS=$PAM_MAT_VALIDATION_CREDENTIALS" \
+    -e "PAM_MCPM_VALIDATION_URL=$PAM_MCPM_VALIDATION_URL" \
     -e "SYNTHETIC_ARTICLE_UUID=$SYNTHETIC_ARTICLE_UUID" \
     -e "SYNTHETIC_ARTICLE_PAYLOAD=$SYNTHETIC_ARTICLE_PAYLOAD" \
     -e "SYNTHETIC_LIST_UUID=$SYNTHETIC_LIST_UUID" \
