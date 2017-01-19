@@ -57,7 +57,7 @@ coreos:
             Environment="DOCKER_OPTS=--log-driver=none --host 0.0.0.0:2375"
       command: start
     - name: swapon.service
-      command: start
+      command: stop
       content: |
           [Unit]
           Description=Create swap
