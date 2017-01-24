@@ -82,6 +82,10 @@ export PAM_MAT_VALIDATION_URL=
 #Format: <username>:<password>
 export PAM_MAT_VALIDATION_CREDENTIALS=
 
+#The UUID used by PAM to check the read environment credentials.
+#NOTE:currently this is the same uuid as used by the synthetic article monitor resource uuid and so guaranteed to exist.
+export PAM_CREDENTIAL_VALIDATION_UUID
+
 #to validate content placeholders (link-files) are valid for publication
 #the corresponding delivery cluster mcpm url for a given publish cluster.
 export PAM_MCPM_VALIDATION_URL=
@@ -135,6 +139,7 @@ docker run \
     -e "BINARY_S3_BUCKET=$BINARY_S3_BUCKET" \
     -e "PAM_MAT_VALIDATION_URL=$PAM_MAT_VALIDATION_URL" \
     -e "PAM_MAT_VALIDATION_CREDENTIALS=$PAM_MAT_VALIDATION_CREDENTIALS" \
+    -e "PAM_CREDENTIAL_VALIDATION_UUID=$PAM_CREDENTIAL_VALIDATION_UUID" \   
     -e "PAM_MCPM_VALIDATION_URL=$PAM_MCPM_VALIDATION_URL" \
     -e "SYNTHETIC_ARTICLE_UUID=$SYNTHETIC_ARTICLE_UUID" \
     -e "SYNTHETIC_ARTICLE_PAYLOAD=$SYNTHETIC_ARTICLE_PAYLOAD" \
