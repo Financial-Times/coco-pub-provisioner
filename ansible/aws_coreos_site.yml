@@ -11,10 +11,10 @@
     teamDL: "universal.publishing.platform@ft.com"
     environment_tag: default
     instanceType: m4.xlarge
-    vpc_id: {% if region == 'us-east-1' %}vpc-1d25657a{% else %}vpc-36639c52{% endif %}
-    subnets_id_1: {% if region == 'us-east-1' %}subnet-5a978b02{% else %}subnet-b59b54c3{% endif %}
-    subnets_id_2: {% if region == 'us-east-1' %}subnet-b9c608f0{% else %}subnet-1cba5f44{% endif %}
-    subnets_id_3: {% if region == 'us-east-1' %}subnet-b5b5aa9f{% else %}subnet-fcfa5e98{% endif %} 
+    vpc_id: "{% if region == 'us-east-1' %}vpc-1d25657a{% else %}vpc-36639c52{% endif %}"
+    subnets_id_1: "{% if region == 'us-east-1' %}subnet-5a978b02{% else %}subnet-b59b54c3{% endif %}"
+    subnets_id_2: "{% if region == 'us-east-1' %}subnet-b9c608f0{% else %}subnet-1cba5f44{% endif %}"
+    subnets_id_3: "{% if region == 'us-east-1' %}subnet-b5b5aa9f{% else %}subnet-fcfa5e98{% endif %}"
   vars_files:
     - keys.yaml
 
