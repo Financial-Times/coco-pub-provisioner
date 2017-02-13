@@ -4,19 +4,14 @@ coreos:
   update:
     reboot-strategy: off
   etcd2:
-    # generate a new token for each unique cluster from https://discovery.etcd.io/new?size=3
     discovery: {{token}}
     heartbeat-interval: 300
     election-timeout: 3000
-    # multi-region and multi-cloud deployments need to use $public_ipv4
     advertise-client-urls: http://$private_ipv4:2379,http://$private_ipv4:4001
     initial-advertise-peer-urls: http://$private_ipv4:2380
-    # listen on both the official ports and the legacy ports
-    # legacy ports can be omitted if your application doesn't depend on them
     listen-client-urls: http://0.0.0.0:2379,http://0.0.0.0:4001
     listen-peer-urls: http://$private_ipv4:2380,http://$private_ipv4:7001
   fleet:
-    # allow etcd to slow down at times
     etcd_request_timeout: 3.0
     metadata: host_type=persistent,persistent_tag={{persistent_tag}}
   units:
@@ -86,7 +81,6 @@ coreos:
       content: |
           [Unit]
           Description=Add secret keys to etcd2
-          # Only run on first boot (creates the file at the end of the execution)
           ConditionPathExists=!/var/lib/format-done
 
           [Service]
@@ -136,7 +130,6 @@ coreos:
           Description=Start fleet services
           After=fleet.service
           Requires=fleet.service
-          # Only run on first boot
           ConditionPathExists=!/var/lib/format-done
 
           [Service]
