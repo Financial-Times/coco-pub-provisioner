@@ -115,6 +115,7 @@ coreos:
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/pam-mcpm-validation-url '{{pam_mcpm_validation_url}}'                          >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/pam-mimm-validation-url '{{pam_mimm_validation_url}}'                          >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/pam-ml-validation-url '{{pam_ml_validation_url}}'                              >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/pam-maicm-validation-url '{{pam_maicm_validation_url}}'                        >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/pam-credential-validation-uuid '{{pam_credential_validation_uuid}}'            >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/synthetic-article-uuid '{{synthetic_article_uuid}}'                            >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/synthetic-article-payload '{{synthetic_article_payload}}'                      >/dev/null 2>&1 || true;"

@@ -98,6 +98,10 @@ export PAM_MIMM_VALIDATION_URL=
 #the corresponding delivery cluster ml mapper url for a given publish cluster.
 export PAM_ML_VALIDATION_URL=
 
+#to validate methode articles' internal components are valid for publication
+#the corresponding delivery cluster maic mapper url for a given publish cluster.
+export PAM_MAICM_VALIDATION_URL=
+
 # For publishing videos, the brightcove-notifier and brightcove-metadata-preprocessor must connect to the Brightcove API with an id like this: 47628783001
 export BRIGHTCOVE_ACCOUNT_ID=
 
