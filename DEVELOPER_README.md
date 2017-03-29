@@ -76,7 +76,7 @@ export BINARY_S3_BUCKET=
 
 #to validate articles are valid for publication
 #the corresponding delivery cluster article mapper url for a given publish cluster.
-export PAM_MAT_VALIDATION_URL=
+export PAM_MAM_VALIDATION_URL=
 
 #methode content-placeholders
 export PAM_MCPM_VALIDATION_URL=

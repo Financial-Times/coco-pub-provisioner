@@ -40,7 +40,7 @@ echo $VAULT_PASS > /vault.pass && ansible-playbook -i ~/.ansible_hosts /ansible/
   s3_image_bucket_urls=${S3_IMAGE_BUCKET_URLS} \
   delivery_clusters_http_credentials=${DELIVERY_CLUSTERS_HTTP_CREDENTIALS}\
   binary_s3_bucket=${BINARY_S3_BUCKET} \
-  pam_mat_validation_url=${PAM_MAT_VALIDATION_URL} \
+  pam_mam_validation_url=${PAM_MAM_VALIDATION_URL} \
   pam_mcpm_validation_url=${PAM_MCPM_VALIDATION_URL} \
   pam_mimm_validation_url=${PAM_MIMM_VALIDATION_URL} \
   pam_ml_validation_url=${PAM_ML_VALIDATION_URL} \
