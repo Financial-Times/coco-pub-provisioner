@@ -90,6 +90,13 @@ export PAM_CREDENTIAL_VALIDATION_UUID
 #the corresponding delivery cluster mcpm url for a given publish cluster.
 export PAM_MCPM_VALIDATION_URL=
 
+#to validate methode images are valid for publication
+#the corresponding delivery cluster mim mapper url for a given publish cluster.
+export PAM_MIMM_VALIDATION_URL=
+
+#to validate methode lists (webcontainers) are valid for publication
+#the corresponding delivery cluster ml mapper url for a given publish cluster.
+export PAM_ML_VALIDATION_URL=
 
 # For publishing videos, the brightcove-notifier and brightcove-metadata-preprocessor must connect to the Brightcove API with an id like this: 47628783001
 export BRIGHTCOVE_ACCOUNT_ID=
