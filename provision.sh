@@ -46,6 +46,7 @@ echo $VAULT_PASS > /vault.pass && ansible-playbook -i ~/.ansible_hosts /ansible/
   pam_ml_validation_url=${PAM_ML_VALIDATION_URL} \
   pam_maicm_validation_url=${PAM_MAICM_VALIDATION_URL} \
   pam_video_validation_url=${PAM_VIDEO_VALIDATION_URL} \
+  pam_wam_validation_url=${PAM_WAM_VALIDATION_URL} \
   pam_mat_validation_credentials=${PAM_MAT_VALIDATION_CREDENTIALS} \
   pam_credential_validation_uuid=${PAM_CREDENTIAL_VALIDATION_UUID} \
   synthetic_article_uuid=${SYNTHETIC_ARTICLE_UUID} \
