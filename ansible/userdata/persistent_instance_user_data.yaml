@@ -4,24 +4,20 @@ coreos:
   update:
     reboot-strategy: off
   etcd2:
-    # generate a new token for each unique cluster from https://discovery.etcd.io/new?size=3
     discovery: {{token}}
     heartbeat-interval: 300
     election-timeout: 3000
-    # multi-region and multi-cloud deployments need to use $public_ipv4
     advertise-client-urls: http://$private_ipv4:2379,http://$private_ipv4:4001
     initial-advertise-peer-urls: http://$private_ipv4:2380
-    # listen on both the official ports and the legacy ports
-    # legacy ports can be omitted if your application doesn't depend on them
     listen-client-urls: http://0.0.0.0:2379,http://0.0.0.0:4001
     listen-peer-urls: http://$private_ipv4:2380,http://$private_ipv4:7001
   fleet:
-    # allow etcd to slow down at times
     etcd_request_timeout: 3.0
     metadata: host_type=persistent,persistent_tag={{persistent_tag}}
   units:
     - name: update-engine.service
       command: stop
+      mask: true
     - name: locksmithd.service
       command: stop
     - name: authorized_keys.service
@@ -50,13 +46,13 @@ coreos:
           WantedBy=timers.target
     - name: docker.service
       drop-ins:
-        - name: 10-turn-off-logging.conf
+        - name: 11-docker-opts.conf
           content: |
             [Service]
-            Environment="DOCKER_OPTS=--log-driver=none"
+            Environment="DOCKER_OPTS=--log-driver=none --host 0.0.0.0:2375"
       command: start
     - name: swapon.service
-      command: start
+      command: stop
       content: |
           [Unit]
           Description=Create swap
@@ -85,7 +81,6 @@ coreos:
       content: |
           [Unit]
           Description=Add secret keys to etcd2
-          # Only run on first boot (creates the file at the end of the execution)
           ConditionPathExists=!/var/lib/format-done
 
           [Service]
@@ -93,18 +88,43 @@ coreos:
           ExecStartPre=/bin/sh -c "while true; do etcdctl cluster-health && break || sleep 2; done"
           ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/aws/aws_access_key_id '{{ apps_aws_access_key }}'                                   >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/aws/aws_secret_access_key '{{ apps_aws_secret_access_key }}'                        >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/brightcove_auth '{{brightcove_auth}}'                                               >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/cms-notifier/post-credentials '{{ cms_notifier_credentials }}'                      >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/elb_name 'coreos-up-{{clusterid}}'                                                  >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/varnish/htpasswd '{{ varnish_access_credentials }}'                                 >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/konstructor/api-key '{{ konstructor_api_key }}'                                     >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/wordpress/content_api_key '{{ wordpress_api_key }}'                                 >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/wp '{{ wp_contentApi_key }}'                                                        >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/tme/username '{{ tme_username }}'                                                   >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/tme/password '{{ tme_password }}'                                                   >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/tme/token '{{ tme_token }}'                                                         >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/environment_tag '{{environment_tag}}'                                                     >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/aws_region '{{region}}'                                                                   >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/splunk-forwarder/splunk_url 'https://ingest.splunk.glb.ft.com/coco-up/fleet'              >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/concepts-rw-s3/bucket '{{concepts_rw_s3_bucket}}'                                         >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/concepts-rw-s3/bucket_region '{{concepts_rw_s3_bucket_region}}'                           >/dev/null 2>&1 || true;"
           ExecStart=/bin/sh -c "etcdctl mk /ft/config/services-definition-root-uri '{{services_definition_root_uri}}'                           >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/bertha/urls/authors '{{authors_bertha_url}}'                                              >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/bertha/urls/roles '{{roles_bertha_url}}'                                                  >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/bertha/urls/brands '{{brands_bertha_url}}'                                                >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/bertha/urls/video-metadata-mappings '{{mappings_bertha_url}}'                             >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/tme_host '{{tme_host}}'                                                                   >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/brightcove/account-id '{{brightcove_account_id}}'                                         >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/read-urls '{{delivery_clusters_urls}}'                                         >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/s3-image-bucket-urls '{{s3_image_bucket_urls}}'                                >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/binary-s3-bucket '{{binary_s3_bucket}}'                                        >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/pam-mat-validation-url '{{pam_mat_validation_url}}'                            >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/pam-mcpm-validation-url '{{pam_mcpm_validation_url}}'                          >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/pam-credential-validation-uuid '{{pam_credential_validation_uuid}}'            >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/synthetic-article-uuid '{{synthetic_article_uuid}}'                            >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/synthetic-article-payload '{{synthetic_article_payload}}'                      >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/config/monitoring/synthetic-list-uuid '{{synthetic_list_uuid}}'                                  >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/publish-read/read-credentials '{{delivery_clusters_http_credentials}}'              >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/publish-read/validator-credentials '{{pam_mat_validation_credentials}}'             >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/factset/username '{{ factset_username }}'                                           >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/factset/key/first_part '{{ factset_key_first_part }}'                               >/dev/null 2>&1 || true;"
+          ExecStart=/bin/sh -c "etcdctl mk /ft/_credentials/factset/key/second_part '{{ factset_key_second_part }}'                             >/dev/null 2>&1 || true;"
+
     - name: bootstrap.service
       command: start
       content: |
@@ -112,7 +132,6 @@ coreos:
           Description=Start fleet services
           After=fleet.service
           Requires=fleet.service
-          # Only run on first boot
           ConditionPathExists=!/var/lib/format-done
 
           [Service]
@@ -150,4 +169,60 @@ write_files:
       TOOLBOX_DOCKER_IMAGE=coco/coco-toolbox
       TOOLBOX_DOCKER_TAG=latest
       TOOLBOX_USER=root
+  - path: /etc/systemd/journald.conf.d/10-override-config.conf
+    content: |
+      [Journal]
+      MaxLevelConsole=crit
+      Compress=false
+      RateLimitInterval=0
+      RateLimitBurst=0
+  - path: "/etc/profile.d/history_timestamps.sh"
+    permissions: "0755"
+    owner: "root"
+    content: |
+      #!/bin/bash
+      export HISTTIMEFORMAT="%d/%m/%y %T "
+      export HISTFILESIZE=10000000
+      export HISTSIZE=10000000
+  - path: "/etc/profile.d/services_autocomplete.sh"
+    permissions: "0755"
+    owner: "root"
+    content: |
+      #!/bin/bash
 
+      fleetctl list-units | tail -n +2 | cut -f 1 | tr "\n" " " > /home/core/services.list
+
+      _services(){
+                      local cur=${COMP_WORDS[COMP_CWORD]}
+                      COMPREPLY=( $(compgen -W "$(<~/services.list)" -- ${cur}) )
+      }
+      complete -F _services fcres
+      complete -F _services fcjf
+      complete -F _services fcssh
+  - path: "/etc/profile.d/ft_aliases.sh"
+    permissions: "0755"
+    owner: "root"
+    content: |
+      #!/bin/bash
+      alias ll='ls -l'
+
+      alias fc='fleetctl'
+      alias fclm='fleetctl list-machines'
+      alias fclu='fleetctl list-units'
+      alias fcjf='fleetctl journal -f '
+      alias fcbad='fleetctl list-units | grep -v "exited\|running\|backup\|upgrade"'
+
+      function fclmg() { fleetctl list-machines | grep  $@ ;}
+      function fclug() { fleetctl list-units | grep  $@ ;}
+      function fcssh() { fleetctl ssh $@ ;}
+      function fcjfl() { fleetctl journal -f --lines=$@ ; }
+      function fcres() { fleetctl ssh $@ sudo systemctl restart $@ ; }
+  - path: "/home/core/.ssh/config"
+    permissions: "0600"
+    owner: "core"
+    content: |
+      Host *-tunnel-up.ft.com
+        User core
+        ForwardAgent yes
+        StrictHostKeyChecking no
+        UserKnownHostsFile /dev/null
