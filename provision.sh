@@ -8,8 +8,8 @@ if [ -z "$AWS_MONITOR_TEST_UUID" ]; then AWS_MONITOR_TEST_UUID=$(uuidgen); fi
 if [ -z "$COCO_MONITOR_TEST_UUID" ]; then COCO_MONITOR_TEST_UUID=$(uuidgen); fi
 
 CLUSTERID=`echo $TOKEN_URL | sed "s/http.*\///g" | cut -c1-8`
-AMI=`curl -s https://coreos.com/dist/aws/aws-stable.json | jq -r '.["eu-west-1"].hvm'`
-
+AMI=`curl -s https://coreos.com/dist/aws/aws-stable.json | jq --arg region $AWS_DEFAULT_REGION -r '.[$region].hvm''`
+     
 . .venv/bin/activate && echo $VAULT_PASS > /vault.pass && ansible-playbook -i ~/.ansible_hosts /ansible/aws_coreos_site.yml --extra-vars " \
   clusterid=$CLUSTERID \
   ami=$AMI \
@@ -18,6 +18,8 @@ AMI=`curl -s https://coreos.com/dist/aws/aws-stable.json | jq -r '.["eu-west-1"]
   aws_access_key_id=$AWS_ACCESS_KEY_ID \ 
   aws_secret_access_key=$AWS_SECRET_ACCESS_KEY \
   binary_writer_bucket=$BINARY_WRITER_BUCKET \
+  concepts_rw_s3_bucket=$CONCEPTS_RW_S3_BUCKET \
+  concepts_rw_s3_bucket_region=$CONCEPTS_RW_S3_BUCKET_REGION \
   aws_image_monitor_test_uuid=$AWS_MONITOR_TEST_UUID \
   coco_image_monitor_test_uuid=$COCO_MONITOR_TEST_UUID \
   bridging_message_queue_proxy=${BRIDGING_MESSAGE_QUEUE_PROXY:=https://kafka-proxy-iw-uk-p-1.glb.ft.com,https://kafka-proxy-iw-uk-p-2.glb.ft.com} \
