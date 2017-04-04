@@ -41,7 +41,7 @@ Everything else works fine - `t` or `p` clusters in `eu-west-1`, and `p` cluster
 ## LastPass: PROD Publishing cluster provisioning setup
 ## For TEST cluster
 ## LastPass: TEST Publishing cluster provisioning setup
-## SET PAM_MAT_VALIDATION_URL  to be a request to correspoding delivery cluster MAT content-transform end point
+## SET PAM_MAT_VALIDATIgit ADON_URL  to be a request to correspoding delivery cluster MAT content-transform end point
 
 ## Pull latest stable image and run docker command
 docker pull coco/coco-pub-provisioner:latest
@@ -73,6 +73,8 @@ docker run \
     -e "ROLES_BERTHA_URL=$ROLES_BERTHA_URL" \
     -e "BRANDS_BERTHA_URL=$BRANDS_BERTHA_URL" \
     -e "MAPPINGS_BERTHA_URL=$MAPPINGS_BERTHA_URL" \
+    -e "CONCEPTS_RW_S3_BUCKET=$CONCEPTS_RW_S3_BUCKET" \
+    -e "CONCEPTS_RW_S3_BUCKET_REGION=$CONCEPTS_RW_S3_BUCKET_REGION" \
      coco/coco-pub-provisioner:latest
 
 ## Note - if you require a specific version of the docker image, you can replace 'latest' with 'v1.0.17'
