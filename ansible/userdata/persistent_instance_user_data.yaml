@@ -202,24 +202,6 @@ write_files:
       complete -F _services fcres
       complete -F _services fcjf
       complete -F _services fcssh
-  - path: "/etc/profile.d/ft_aliases.sh"
-    permissions: "0755"
-    owner: "root"
-    content: |
-      #!/bin/bash
-      alias ll='ls -l'
-
-      alias fc='fleetctl'
-      alias fclm='fleetctl list-machines'
-      alias fclu='fleetctl list-units'
-      alias fcjf='fleetctl journal -f '
-      alias fcbad='fleetctl list-units | grep -v "exited\|running\|backup\|upgrade"'
-
-      function fclmg() { fleetctl list-machines | grep  $@ ;}
-      function fclug() { fleetctl list-units | grep  $@ ;}
-      function fcssh() { fleetctl ssh $@ ;}
-      function fcjfl() { fleetctl journal -f --lines=$@ ; }
-      function fcres() { fleetctl ssh $@ sudo systemctl restart $@ ; }
   - path: "/home/core/.ssh/config"
     permissions: "0600"
     owner: "core"

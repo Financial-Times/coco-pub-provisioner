@@ -41,7 +41,14 @@ Everything else works fine - `t` or `p` clusters in `eu-west-1`, and `p` cluster
 ## LastPass: PROD Publishing cluster provisioning setup
 ## For TEST cluster
 ## LastPass: TEST Publishing cluster provisioning setup
-## SET PAM_MAT_VALIDATION_URL  to be a request to correspoding delivery cluster MAT content-transform end point
+## SET PAM_MAM_VALIDATION_URL  to be a request to correspoding delivery cluster methode-article-mapper (MAM) /map endpoint
+## SET PAM_MCPM_VALIDATION_URL  to be a request to correspoding delivery cluster methode-content-placeholder-mapper (MCPM) /map endpoint
+## SET PAM_MIMM_VALIDATION_URL  to be a request to correspoding delivery cluster methode-image-model-mapper (MIMM) /map endpoint
+## SET PAM_ML_VALIDATION_URL  to be a request to correspoding delivery cluster methode-list-mapper (MLM) /map endpoint
+## SET PAM_MAICM_VALIDATION_URL  to be a request to correspoding delivery cluster methode-article-internal-components-mapper (MAICM) /map endpoint
+## SET PAM_VIDEO_VALIDATION_URL  to be a request to correspoding delivery cluster video mapper /map endpoint
+## SET PAM_WAM_VALIDATION_URL  to be a request to correspoding delivery cluster wordpress-article-mapper (WAM) /map endpoint
+## PAM_MAT_VALIDATION_CREDENTIALS basic auth for the delivery cluster?
 
 ## Pull latest stable image and run docker command
 docker pull coco/coco-pub-provisioner:latest
